@@ -1,49 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kittycat7J's marimo stuff</title>
-    <!-- Include Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="font-sans text-[#DDA0DD] bg-[#450245] p-5">
-    <div class="max-w-4xl mx-auto">
-      <!-- Header -->
-      <header class="bg-[#5f0977] p-6 text-center rounded-lg mb-6">
-        <h1 class="text-2xl font-bold mb-2">
-          <a href="https://github.com/Kittycat7J" target="_blank" class="text-[#c969c9] hover:underline">Kittycat7J's</a> marimo stuff
-        </h1>
-        <p class="text-sm">Interactive Python notebooks specificaly for the <a href="https://github.com/Estolit/BedrockCracker" target="_blank" class="text-[#c969c9] hover:underline">Bedrock Cracker</a> project. </p>
-      </header>
-      <main> {% if notebooks %} <h2 class="text-xl font-bold text-center my-4">Notebooks</h2>
-        <p class="text-center mb-4 max-w-2xl">Interactive notebooks in edit mode - you can modify and experiment with the code</p>
-        <div class="flex flex-wrap justify-center gap-4 mb-8"> {% for notebook in notebooks %}
-          <!-- {{ notebook.display_name }} Notebook -->
-          <div class="bg-[#7f09a7] rounded-lg overflow-hidden w-60">
-            <div class="bg-[#5f0977] p-3 font-semibold text-center">{{ notebook.display_name }}</div>
-            <div class="p-4 text-center">
-              <a href="{{ notebook.html_path }}" class="inline-block bg-[#ff8800] hover:bg-[#ff7000] text-[#fdb4fd] py-1 px-3 rounded transition-colors">
-                <b>Open Notebook</b>
-              </a>
-            </div>
-          </div> {% endfor %}
-        </div>
-        <div class="flex flex-wrap justify-center gap-4 mb-8"> {% for app in apps %}
-          <!-- {{ app.display_name }} App -->
-          <div class="bg-[#7f09a7] rounded-lg overflow-hidden w-60">
-            <div class="bg-[#5f0977] p-3 font-semibold text-center">{{ app.display_name }}</div>
-            <div class="p-4 text-center">
-              <a href="{{ app.html_path }}" class="inline-block bg-[#ff8800] hover:bg-[#ff7000] text-[#fdb4fd] py-1 px-3 rounded transition-colors">
-                <b>Open App</b>
-              </a>
-            </div>
-          </div> {% endfor %}
-        </div> {% endif %}
-      </main>
-      <footer class="mt-10 pt-6 border-t border-gray-200 text-center text-sm text-">
-        <p class="mb-2">Built with <a href="https://marimo.io" target="_blank" class="text-[#c969c9] hover:underline">marimo</a> - Interactive Python notebooks </p>
-      </footer>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kittycat7J's marimo stuff</title>
+  <!-- Include Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+  <body class="font-sans text-[#DDA0DD] bg-[#450245] p-5"> 
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <header class="bg-[#5f0977] p-6 text-center rounded-lg mb-6">
+      <h1 class="text-2xl font-bold mb-2"><a href="https://github.com/Kittycat7J" target="_blank" class="text-[#c969c9] hover:underline">Kittycat7J's</a> marimo stuff</h1>
+      <p class="text-sm">Interactive Python notebooks specificaly for the <a href="https://github.com/Estolit/BedrockCracker" target="_blank" class="text-[#c969c9] hover:underline">Bedrock Cracker</a> project.</p>
+    </header>
+
+    <main>
+      {% if notebooks %}
+      <h2 class="text-xl font-bold text-center my-4">Notebooks</h2>
+      <p class="text-center mb-4 mx-auto">Interactive notebooks in edit mode - you can modify and experiment with the code</p>
+      <div class="flex flex-wrap justify-center gap-4 mb-8"> {% for notebook in notebooks %}
+        <!-- {{ notebook.display_name }} Notebook -->
+        <div class="bg-[#7f09a7] rounded-lg overflow-hidden w-60">
+          <div class="bg-[#5f0977] p-3 font-semibold text-center">{{ notebook.display_name }}</div>
+          <div class="p-4 text-center">
+            <a href="{{ notebook.html_path }}" class="inline-block bg-[#ff8800] hover:bg-[#ff7000] text-[#fdb4fd] py-1 px-3 rounded transition-colors">
+              <b>Open Notebook</b>
+            </a>
+          </div>
+        </div> {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if apps %}
+      <h2 class="text-xl font-bold text-center my-4">Apps</h2>
+      <p class="text-center mb-4 mx-auto">Interactive applications in run mode - code is hidden for a clean user interface</p>
+      <div class="flex flex-wrap justify-center gap-4 mb-8"> {% for app in apps %}
+        <!-- {{ app.display_name }} App -->
+        <div class="bg-[#7f09a7] rounded-lg overflow-hidden w-60">
+          <div class="bg-[#5f0977] p-3 font-semibold text-center">{{ app.display_name }}</div>
+          <div class="p-4 text-center">
+            <a href="{{ app.html_path }}" class="inline-block bg-[#ff8800] hover:bg-[#ff7000] text-[#fdb4fd] py-1 px-3 rounded transition-colors">
+              <b>Open App</b>
+            </a>
+          </div>
+        </div> {% endfor %}
+      </div>
+      {% endif %}
+    </main>
+
+    <footer class="mt-10 pt-6 border-t border-gray-200 text-center text-sm text-">
+      <p class="mb-2">Built with <a href="https://marimo.io" target="_blank" class="text-[#c969c9] hover:underline">marimo</a> - Interactive Python notebooks</p>
+    </footer>
+  </div>
+</body>
 </html>
