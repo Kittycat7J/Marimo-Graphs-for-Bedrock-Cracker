@@ -7,12 +7,12 @@
   <!-- Include Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="font-sans text-gray-800 bg-white p-5">    
+  <body class="font-sans text-[#DDA0DD] bg-[#450245] p-5"> 
   <div class="max-w-4xl mx-auto">
     <!-- Header -->
-    <header class="bg-gray-100 p-6 text-center rounded-lg mb-6">
-      <h1 class="text-2xl font-bold mb-2"><a href="https://github.com/Kittycat7J" style="text-decoration: underline;">Kittycat7J's</a> marimo stuff</h1>
-      <p class="text-sm">Interactive Python notebooks specificaly for the <a href="https://github.com/Estolit/BedrockCracker" style="text-decoration: underline;">Bedrock Cracker</a> project.</p>
+    <header class="bg-[#5f0977] p-6 text-center rounded-lg mb-6">
+      <h1 class="text-2xl font-bold mb-2"><a href="https://github.com/Kittycat7J" target="_blank" class="text-[#c969c9] hover:underline">Kittycat7J's</a> marimo stuff</h1>
+      <p class="text-sm">Interactive Python notebooks specificaly for the <a href="https://github.com/Estolit/BedrockCracker" target="_blank" class="text-[#c969c9] hover:underline">Bedrock Cracker</a> project.</p>
     </header>
 
     <main>
@@ -22,10 +22,10 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 text-center">
         {% for notebook in notebooks %}
         <!-- {{ notebook.display_name }} Notebook -->
-        <div class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
-          <div class="bg-gray-200 p-3 font-semibold">{{ notebook.display_name }}</div>
+        <div class="bg-[#7f09a7] rounded-lg overflow-hidden">
+          <div class="bg-[#5f0977] p-3 font-semibold">{{ notebook.display_name }}</div>
           <div class="p-4">
-            <a href="{{ notebook.html_path }}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded transition-colors">Open Notebook</a>
+            <a href="{{ notebook.html_path }}" class="inline-block bg-amber-500 hover:bg-amber-600 text-[#fdb4fd] py-1 px-3 rounded transition-colors"><b>Open Notebook</b></a>
           </div>
         </div>
         {% endfor %}
@@ -38,10 +38,10 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
         {% for app in apps %}
         <!-- {{ app.display_name }} App -->
-        <div class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
-          <div class="bg-gray-100 p-3 font-semibold">{{ app.display_name }}</div>
+        <div class="bg-[#7f09a7] rounded-lg overflow-hidden">
+          <div class="bg-[#5f0977] p-3 font-semibold">{{ app.display_name }}</div>
           <div class="p-4">
-            <a href="{{ app.html_path }}" class="inline-block bg-amber-500 hover:bg-amber-600 text-white py-1 px-3 rounded transition-colors">Open App</a>
+            <a href="{{ app.html_path }}" class="inline-block bg-amber-500 hover:bg-amber-600 text-[#fdb4fd] py-1 px-3 rounded transition-colors"><b>Open App</b></a>
           </div>
         </div>
         {% endfor %}
@@ -49,8 +49,8 @@
       {% endif %}
     </main>
 
-    <footer class="mt-10 pt-6 border-t border-gray-200 text-center text-sm text-gray-600">
-      <p class="mb-2">Built with <a href="https://marimo.io" target="_blank" class="text-blue-500 hover:underline">marimo</a> - Interactive Python notebooks</p>
+    <footer class="mt-10 pt-6 border-t border-gray-200 text-center text-sm text-">
+      <p class="mb-2">Built with <a href="https://marimo.io" target="_blank" class="text-[#c969c9] hover:underline">marimo</a> - Interactive Python notebooks</p>
     </footer>
   </div>
 </body>
