@@ -18,7 +18,7 @@ app = marimo.App(
 )
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _():
     import marimo as mo
     import pandas as pd
@@ -29,7 +29,7 @@ def _():
     return alt, mo, np, pd
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     fileInput = mo.ui.file(label="input data")
     fileInput
