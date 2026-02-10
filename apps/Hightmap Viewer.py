@@ -291,7 +291,7 @@ def _(mo):
     mo.vstack([
         mo.md("## Heightmap Viewer"),
         mo.hstack([file_select, mo.md("Select a JSON file to visualize")]),
-        mo.md("### Subchunk Coordinates"),
+        mo.md("### Center(Player) Subchunk Coordinates"),
         mo.hstack([x_input, y_input, z_input]),
     ], align="start")
     return file_select, x_input, y_input, z_input
