@@ -18,14 +18,14 @@
     <main>
       {% if notebooks %}
       <h2 class="text-xl font-bold text-center my-4">Notebooks</h2>
-      <p class="text-center mb-4">Interactive notebooks in edit mode - you can modify and experiment with the code</p>
+      <p class="text-center mb-4 max-w-2xl">Interactive notebooks in edit mode - you can modify and experiment with the code</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 text-center">
         {% for notebook in notebooks %}
         <!-- {{ notebook.display_name }} Notebook -->
         <div class="bg-[#7f09a7] rounded-lg overflow-hidden">
           <div class="bg-[#5f0977] p-3 font-semibold">{{ notebook.display_name }}</div>
           <div class="p-4">
-            <a href="{{ notebook.html_path }}" class="inline-block bg-amber-500 hover:bg-amber-600 text-[#fdb4fd] py-1 px-3 rounded transition-colors"><b>Open Notebook</b></a>
+            <a href="{{ notebook.html_path }}" class="inline-block bg-[#ff8800] hover:bg-[#ff7000] text-[#fdb4fd] py-1 px-3 rounded transition-colors"><b>Open Notebook</b></a>
           </div>
         </div>
         {% endfor %}
@@ -34,14 +34,14 @@
 
       {% if apps %}
       <h2 class="text-xl font-bold text-center my-4">Apps</h2>
-      <p class="text-center mb-4">Interactive applications in run mode - code is hidden for a clean user interface</p>
+      <p class="text-center mb-4 max-w-2xl">Interactive applications in run mode - code is hidden for a clean user interface</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
         {% for app in apps %}
         <!-- {{ app.display_name }} App -->
         <div class="bg-[#7f09a7] rounded-lg overflow-hidden">
           <div class="bg-[#5f0977] p-3 font-semibold">{{ app.display_name }}</div>
           <div class="p-4">
-            <a href="{{ app.html_path }}" class="inline-block bg-amber-500 hover:bg-amber-600 text-[#fdb4fd] py-1 px-3 rounded transition-colors"><b>Open App</b></a>
+            <a href="{{ app.html_path }}" class="inline-block bg-[#ff8800] hover:bg-[#ff7000] text-[#fdb4fd] py-1 px-3 rounded transition-colors"><b>Open App</b></a>
           </div>
         </div>
         {% endfor %}
