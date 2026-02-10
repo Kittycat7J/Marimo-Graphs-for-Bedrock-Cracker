@@ -98,7 +98,7 @@ def _(CHUNK_RADIUS, CHUNK_SIZE, file_select, json, np):
 
 
 @app.cell(hide_code=True)
-def _(go, np, pc):
+def _(CHUNK_RADIUS, CHUNK_SIZE, go, np, pc):
     def draw(height_grid, id_grid, data_grid, section_grid, center_chunk=None):
         size = height_grid.shape[0]
 
@@ -236,8 +236,17 @@ def _(go, np, pc):
             xaxis=dict(constrain="domain")
         )
 
-        fig.update_xaxes(showgrid=False)
-        fig.update_yaxes(showgrid=False)
+        fig.update_xaxes(
+            showgrid=False,
+            tickvals=[i for i in range(-CHUNK_RADIUS*CHUNK_SIZE, (CHUNK_RADIUS+1)*CHUNK_SIZE, CHUNK_SIZE)],
+            ticktext=[str(i) for i in range(-CHUNK_RADIUS*CHUNK_SIZE, (CHUNK_RADIUS+1)*CHUNK_SIZE, CHUNK_SIZE)]
+        )
+
+        fig.update_yaxes(
+            showgrid=False,
+            tickvals=[-i for i in range(-CHUNK_RADIUS*CHUNK_SIZE, (CHUNK_RADIUS+1)*CHUNK_SIZE, CHUNK_SIZE)],
+            ticktext=[str(i) for i in range(-CHUNK_RADIUS*CHUNK_SIZE, (CHUNK_RADIUS+1)*CHUNK_SIZE, CHUNK_SIZE)]
+        )
 
         return fig
 
