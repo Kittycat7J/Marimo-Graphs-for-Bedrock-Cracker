@@ -18,8 +18,8 @@
     <main>
       {% if notebooks %}
       <h2 class="text-xl font-bold text-center my-4">Notebooks</h2>
-      <p class="text-center mb-4 max-w-2xl">Interactive notebooks in edit mode - you can modify and experiment with the code</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 text-center">
+      <p class="text-center mb-4">Interactive notebooks in edit mode - you can modify and experiment with the code</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 text-center mx-auto max-w-6xl">
         {% for notebook in notebooks %}
         <!-- {{ notebook.display_name }} Notebook -->
         <div class="bg-[#7f09a7] rounded-lg overflow-hidden">
@@ -34,8 +34,8 @@
 
       {% if apps %}
       <h2 class="text-xl font-bold text-center my-4">Apps</h2>
-      <p class="text-center mb-4 max-w-2xl">Interactive applications in run mode - code is hidden for a clean user interface</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
+      <p class="text-center mb-4">Interactive applications in run mode - code is hidden for a clean user interface</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center mx-auto max-w-6xl">
         {% for app in apps %}
         <!-- {{ app.display_name }} App -->
         <div class="bg-[#7f09a7] rounded-lg overflow-hidden">
