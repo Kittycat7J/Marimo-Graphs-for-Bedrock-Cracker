@@ -6,6 +6,8 @@
 #     "numpy==2.3.5",
 #     "plotly==6.5.2",
 # ]
+# [tool.marimo.display]
+# theme = "dark"
 # ///
 
 import marimo
