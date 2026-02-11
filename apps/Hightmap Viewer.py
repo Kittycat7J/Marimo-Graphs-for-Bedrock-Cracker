@@ -98,7 +98,7 @@ def _(CHUNK_RADIUS, CHUNK_SIZE, file_select, json, np):
 
 
 @app.cell(hide_code=True)
-def _(CHUNK_RADIUS, CHUNK_SIZE, go, np, pc):
+def _(go, np, pc):
     def draw(height_grid, id_grid, data_grid, section_grid, center_chunk=None):
         size = height_grid.shape[0]
 
@@ -106,8 +106,10 @@ def _(CHUNK_RADIUS, CHUNK_SIZE, go, np, pc):
         subchunk_y_offset = 16 * (center_chunk[1] if center_chunk else 0)
 
         # Determine offsets for world coordinates
-        offset_x = (center_chunk[0] if center_chunk else 0) * 16
-        offset_z = (center_chunk[2] if center_chunk else 0) * 16
+        center_x = center_chunk[0] if center_chunk else 0
+        center_z = center_chunk[2] if center_chunk else 0
+        offset_x = center_x * 16
+        offset_z = center_z * 16
 
         xs_world, zs_world, heights, hover_texts = [], [], [], []
 
@@ -128,15 +130,10 @@ def _(CHUNK_RADIUS, CHUNK_SIZE, go, np, pc):
                 chunk_z = (y_idx // 16) - 7
                 local_x = x_idx % 16
                 local_z = y_idx % 16
-            
-                # Apply center_chunk offset
-                center_x = center_chunk[0] if center_chunk else 0
-                center_z = center_chunk[2] if center_chunk else 0
-            
+
                 world_x = (chunk_x - center_x) * 16 + local_x
                 world_z = (chunk_z - center_z) * 16 + local_z
                 display_height = h + subchunk_y_offset
-
 
                 xs_world.append(world_x)
                 zs_world.append(-world_z)
@@ -144,14 +141,13 @@ def _(CHUNK_RADIUS, CHUNK_SIZE, go, np, pc):
 
                 world_chunk_x = chunk_x - center_x
                 world_chunk_z = chunk_z - center_z
-            
+
                 hover_texts.append(
                     f"X={world_x} Z={world_z}<br>"
                     f"Height(Y)={int(display_height)}<br>"
                     f"ID={int(bid)} DV={int(d)}<br>"
-                    f"Chunk=({world_chunk_x},{world_chunk_z}) LC={int(s)+subchunk_y_offset}"
+                    f"Chunk=({world_chunk_x},{world_chunk_z}) SectionBase={int(s)+subchunk_y_offset}"
                 )
-
 
         # ----------------------------
         # Collect sectionBase per chunk
@@ -199,7 +195,6 @@ def _(CHUNK_RADIUS, CHUNK_SIZE, go, np, pc):
                 layer="below"
             )
 
-
         # --- height scatter ---
         fig.add_trace(go.Scatter(
             x=xs_world,
@@ -236,20 +231,35 @@ def _(CHUNK_RADIUS, CHUNK_SIZE, go, np, pc):
             xaxis=dict(constrain="domain")
         )
 
+        # X-axis ticks - apply center_x offset
+        x_tick_start = (-7 - center_x) * 16
+        x_tick_end = (8 - center_x) * 16
+        x_tick_step = 16
+    
+        x_tick_vals = list(range(x_tick_start, x_tick_end, x_tick_step))
+        x_tick_text = [str(val) for val in x_tick_vals]
+
         fig.update_xaxes(
             showgrid=False,
-            tickvals=[i for i in range(-CHUNK_RADIUS*CHUNK_SIZE, (CHUNK_RADIUS+1)*CHUNK_SIZE, CHUNK_SIZE)],
-            ticktext=[str(i) for i in range(-CHUNK_RADIUS*CHUNK_SIZE, (CHUNK_RADIUS+1)*CHUNK_SIZE, CHUNK_SIZE)]
+            tickvals=x_tick_vals,
+            ticktext=x_tick_text
         )
+
+        # Y-axis ticks - apply center_z offset and flip
+        y_tick_start = (-7 - center_z) * 16
+        y_tick_end = (8 - center_z) * 16
+        y_tick_step = 16
+    
+        y_tick_vals = [-val for val in range(y_tick_start, y_tick_end, y_tick_step)]
+        y_tick_text = [str(val) for val in range(y_tick_start, y_tick_end, y_tick_step)]
 
         fig.update_yaxes(
             showgrid=False,
-            tickvals=[-i for i in range(-CHUNK_RADIUS*CHUNK_SIZE, (CHUNK_RADIUS+1)*CHUNK_SIZE, CHUNK_SIZE)],
-            ticktext=[str(i) for i in range(-CHUNK_RADIUS*CHUNK_SIZE, (CHUNK_RADIUS+1)*CHUNK_SIZE, CHUNK_SIZE)]
+            tickvals=y_tick_vals,
+            ticktext=y_tick_text
         )
 
         return fig
-
 
     return (draw,)
 
@@ -306,7 +316,6 @@ def _(draw, file_select, load_grid, mo, x_input, y_input, z_input):
         fig0 = draw(height_grid, id_grid, data_grid, section_grid, center_chunk=center_chunk)
         graph = mo.ui.plotly(fig0)
     graph
-
     return
 
 
