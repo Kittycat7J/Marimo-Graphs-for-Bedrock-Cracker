@@ -6,6 +6,8 @@
 #     "pandas==3.0.0",
 #     "plotly==6.5.2",
 # ]
+# [tool.marimo.display]
+# theme = "dark"
 # ///
 
 import marimo
