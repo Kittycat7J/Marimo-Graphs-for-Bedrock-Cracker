@@ -7,10 +7,10 @@
 # theme = "dark"
 # ///
 
-
 import marimo
-app = marimo.App()
+
 __generated_with = "0.17.6"
+app = marimo.App()
 
 
 @app.cell(hide_code=True)
@@ -20,11 +20,11 @@ def _():
     from math import gcd
     from typing import List, Tuple
     import io
-    return
+    return List, Tuple, csv, gcd, io, mo
 
 
 @app.cell(hide_code=True)
-def _():
+def _(List, Tuple, csv, gcd, io):
     def lcm(a: int, b: int) -> int:
         return a * b // gcd(a, b)
 
@@ -48,11 +48,11 @@ def _():
         target = rows[0]
         mods = rows[1:]
         return target, mods
-    return
+    return (loadCsvFile,)
 
 
 @app.cell(hide_code=True)
-def _():
+def _(mo):
     """
     Tabs for input: Upload CSV or Manual Entry
     """
@@ -87,13 +87,26 @@ def _():
         "Upload CSV": uploadUI,
         "Manual Entry": manualUI
     })
-    return
+    return (
+        fileUpload,
+        manualModsText,
+        manualTargetMod,
+        manualTargetRem,
+        selectedTab,
+    )
 
 
 @app.cell(hide_code=True)
-def _():
+def _(
+    fileUpload,
+    loadCsvFile,
+    manualModsText,
+    manualTargetMod,
+    manualTargetRem,
+    selectedTab,
+):
     # /// Definition cell — normalize inputs
-
+    errorFlag = None
     # Target pair
     if selectedTab.value == "Manual Entry":
         targetPair = (manualTargetMod.value, manualTargetRem.value)
@@ -105,10 +118,13 @@ def _():
             if not line:
                 continue
             parts = line.split(",")
-            if len(parts) != 2:
-                raise ValueError(f"Invalid constraint line: '{line}' (must be mod,rem)")
-            mod, rem = int(parts[0].strip()), int(parts[1].strip())
-            constraintPairs.append((mod, rem))
+            try: 
+                mod, rem = int(parts[0].strip()), int(parts[1].strip())
+                constraintPairs.append((mod, rem))
+            except Exception as e: 
+                errorFlag = e
+            
+        
     else:
         # CSV input
         if fileUpload.value:
@@ -116,10 +132,11 @@ def _():
         else:
             targetPair = None
             constraintPairs = []
-    return
+    return constraintPairs, errorFlag, targetPair
+
 
 @app.cell(hide_code=True)
-def _():
+def _(gcd):
     # /// Solver function cell (CRT-based, cycle-free)
 
     def solveConstraints(targetPair, constraintPairs):
@@ -170,20 +187,31 @@ def _():
         targetImplied = (x % targetMod) == targetRem and (period % targetMod) == 0
 
         return period, targetImplied
-    return
+    return (solveConstraints,)
 
 
 @app.cell(hide_code=True)
-def _():
+def _(
+    constraintPairs,
+    errorFlag,
+    mo,
+    selectedTab,
+    solveConstraints,
+    targetPair,
+):
     """
     Render main UI
     """
+    if not errorFlag:
+        result = mo.vstack(solveConstraints(targetPair, constraintPairs))
+    else:
+        result = mo.md(f'error lol: {errorFlag}')
     mo.vstack([
         mo.md("# Modular Congruence Checker"),
         selectedTab,
         mo.md("---"),
         mo.md("## Result"),
-        mo.vstack(solveConstraints(targetPair, constraintPairs)),
+        result
     ])
     return
 
