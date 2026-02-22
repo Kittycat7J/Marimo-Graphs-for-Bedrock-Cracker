@@ -9,7 +9,7 @@
 
 
 import marimo
-
+app = marimo.App()
 __generated_with = "0.17.6"
 
 
@@ -20,11 +20,11 @@ def _():
     from math import gcd
     from typing import List, Tuple
     import io
-    return List, Tuple, csv, gcd, io, mo
+    return
 
 
 @app.cell(hide_code=True)
-def _(List, Tuple, csv, gcd, io):
+def _():
     def lcm(a: int, b: int) -> int:
         return a * b // gcd(a, b)
 
@@ -37,7 +37,7 @@ def _(List, Tuple, csv, gcd, io):
         for x in range(period):
             if all(x % n == r for n, r in mods):
                 solutions.append(x)
-        return period, solutions
+        return
 
     def loadCsvFile(content: str) -> Tuple[Tuple[int, int], List[Tuple[int, int]]]:
         f = io.StringIO(content)
@@ -48,11 +48,11 @@ def _(List, Tuple, csv, gcd, io):
         target = rows[0]
         mods = rows[1:]
         return target, mods
-    return (loadCsvFile,)
+    return
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     """
     Tabs for input: Upload CSV or Manual Entry
     """
@@ -87,24 +87,11 @@ def _(mo):
         "Upload CSV": uploadUI,
         "Manual Entry": manualUI
     })
-    return (
-        fileUpload,
-        manualModsText,
-        manualTargetMod,
-        manualTargetRem,
-        selectedTab,
-    )
+    return
 
 
 @app.cell(hide_code=True)
-def _(
-    fileUpload,
-    loadCsvFile,
-    manualModsText,
-    manualTargetMod,
-    manualTargetRem,
-    selectedTab,
-):
+def _():
     # /// Definition cell — normalize inputs
 
     # Target pair
@@ -129,11 +116,10 @@ def _(
         else:
             targetPair = None
             constraintPairs = []
-    return constraintPairs, targetPair
-
+    return
 
 @app.cell(hide_code=True)
-def _(gcd):
+def _():
     # /// Solver function cell (CRT-based, cycle-free)
 
     def solveConstraints(targetPair, constraintPairs):
@@ -184,11 +170,11 @@ def _(gcd):
         targetImplied = (x % targetMod) == targetRem and (period % targetMod) == 0
 
         return period, targetImplied
-    return (solveConstraints,)
+    return
 
 
 @app.cell(hide_code=True)
-def _(constraintPairs, mo, selectedTab, solveConstraints, targetPair):
+def _():
     """
     Render main UI
     """
