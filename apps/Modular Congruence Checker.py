@@ -1,10 +1,16 @@
-# /// marimo-version
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "marimo>=0.20.1",
+# ]
+# [tool.marimo.display]
+# theme = "dark"
 # ///
+
 
 import marimo
 
 __generated_with = "0.17.6"
-app = marimo.App(width="large")
 
 
 @app.cell(hide_code=True)
